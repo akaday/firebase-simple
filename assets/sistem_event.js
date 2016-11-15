@@ -295,18 +295,18 @@ var btn_foto        = document.getElementById("foto");
 var progress_upload = document.getElementById("uploader");
 
 // listen for file selection
-btn_foto.addEventListener('change', function(e))
+btn_foto.addEventListener('change', function(e)
 {
   $("#uploader").show();
 
   // Get file
-  var file = e.target.file[0];
+  var file = e.target.files[0];
 
   // Create e storage ref
   var storageRef = firebase.storage().ref('images/'+file.name);
 
   // Upload file
-  storageRef.put(file);
+  var task = storageRef.put(file);
 
   //Upadate progress bar
   task.on('state_changed',
@@ -326,9 +326,9 @@ btn_foto.addEventListener('change', function(e))
 
     }
 
-  )
+  );
 
-}
+});
 
 /**
   UPLOAD
