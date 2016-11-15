@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>DILO EVENT</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="assets/plugins/datatables/dataTables.bootstrap.css">
+  <!-- Date Picker -->
+  <link rel="stylesheet" href="assets/plugins/datepicker/datepicker3.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="assets/plugins/daterangepicker/daterangepicker.css">
+  <!-- Bootstrap time Picker -->
+  <link rel="stylesheet" href="assets/plugins/timepicker/bootstrap-timepicker.min.css">
+  <!-- bootstrap wysihtml5 - text editor -->
+  <link rel="stylesheet" href="assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="assets/adminlte/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="assets/adminlte/skins/_all-skins.min.css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <style>
+    .form-group span{
+      color: red;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+
+  <header class="main-header">
+    <!-- Logo -->
+    <a href="index.html" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>D</b>MDN</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>DILO</b></span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- User Account: style can be found in dropdown.less -->
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <!-- <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> -->
+              <span class="hidden-xs">Dilo Medan</span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- User image -->
+              <li class="user-header">
+                <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+                <p>
+                  Dilo Medan
+                  <!-- <small>Member since Nov. 2012</small> -->
+                </p>
+              </li>
+              <li class="user-footer">
+                <!-- <div class="pull-left">
+                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                </div> -->
+                <div class="pull-right">
+                  <button id='do_logout' class="btn btn-default btn-flat">Sign out</button>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- =============================================== -->
+
+  <!-- Left side column. contains the sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar user panel -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <!-- <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"> -->
+        </div>
+        <div class="pull-left info">
+          <p>Dilo Event</p>
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+      </div>
+      <!-- search form -->
+      <form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" placeholder="Search...">
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+        </div>
+      </form>
+      <!-- /.search form -->
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu">
+        <li class="header">MAIN NAVIGATION</li>
+        <!-- <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Kategori Event</span></a></li> -->
+        <li id='module_event' class="active"><a href="#"><i class="fa fa-circle-o text-red"></i> <span>List Event</span></a></li>
+        <li id='module_user'><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>List User</span></a></li>
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- =============================================== -->
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1 id='title_page'>
+        {{title_page}}
+        <small id='title_small_page'>{{title_small_page}}</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home </a></li>
+        <li class="active" id='title_page_breadcrumb'>{{title_page}}</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="box">
+        <div class="box-header with-border">
+          <h3 class="box-title" id='title_page_h3'>{{title_page_h3}}</h3>
+
+          <div id='box-tools' class="box-tools pull-right">
+
+          </div>
+        </div>
+        <div class="box-body">
+        <div id='alert' class='alert'></div><br />
+        <!-- Show list Event -->
+        <div id='html_event_list'>
+          <!-- <table id="example2" class="table table-bordered table-hover"> -->
+          <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>image</th>
+                  <th>nama</th>
+                  <th>tanggal</th>
+                  <th>waktu</th>
+                  <th>kuota</th>
+                  <th>aksi</th>
+                </tr>
+                </thead>
+                <tbody id='dataevent'>
+
+                </tbody>
+          </table>
+        </div>
+
+        <!-- Show detail Event -->
+        <div id='html_event_detail'>
+
+        </div>
+
+        <!-- Show Form Event -->
+        <form id='html_form_list'>
+            <input id="key" class="form-control" type="hidden" value='0'>
+            <div class="form-group">
+              <label> nama event </label> <span id='alert_nama_event'></span>
+              <input id="nama_event" class="form-control" placeholder="Nama Event" type="text">
+            </div>
+            <div class="form-group">
+                <label>tanggal </label> <span id='alert_tanggal'></span>
+                <div class="input-group date">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input id="tanggal" class="form-control pull-right datepicker"  type="text">
+                </div>
+                <!-- /.input group -->
+              </div>
+            <div class="form-group">
+              <label>waktu</label> <span id='alert_waktu'></span>
+              <div class="input-group">
+                <input id="waktu" class="form-control timepicker" >
+                <div class="input-group-addon">
+                  <i class="fa fa-clock-o"></i>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label> kuota </label> <span id='alert_kuota_event'></span>
+              <input id="kuota_event" class="form-control" placeholder="Kuota Event" type="text" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputFile"> deskripsi </label> <span id='alert_deskripsi'></span>
+              <textarea id='deskripsi' class="textarea" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputFile"> foto </label> <span id='alert_foto'></span>
+              <input id="foto" type="file" value='upload'>
+              <br />
+              <progress value='0' max='100' class="form-control" id='uploader'></progress>
+            </div>
+            <hr />
+            <button id='do_db_event' class='btn btn-primary'>Submit</button>
+            <button class="btn btn-info" id="module_event" >BACK</button>
+        </form>
+
+
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 2.3.7
+    </div>
+    <strong>Copyright &copy; 2016 DILO MEDAN.</strong> All rights reserved.
+  </footer>
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+
+<script src="https://www.gstatic.com/firebasejs/3.6.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyD14eRKeoaGv-mxzfBGCR01Myzc2God5Vw",
+    authDomain: "dilo-event.firebaseapp.com",
+    databaseURL: "https://dilo-event.firebaseio.com",
+    storageBucket: "dilo-event.appspot.com",
+    messagingSenderId: "656625557034"
+  };
+  firebase.initializeApp(config);
+</script>
+
+<!-- jQuery 2.2.3 -->
+<script src="assets/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- SISTEM -->
+<script src="assets/sistem_event.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<!-- daterangepicker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- datepicker -->
+<script src="assets/plugins/datepicker/bootstrap-datepicker.js"></script>
+<!-- bootstrap time picker -->
+<script src="assets/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script src="assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<!-- datatables -->
+<script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- AdminLTE App -->
+<script src="assets/adminlte/app.min.js"></script>
+<!-- DATA -->
+<script>
+//Data Table
+// $(function () {
+//   $("#example1").DataTable();
+//   $('#example2').DataTable({
+//     "paging": true,
+//     "lengthChange": false,
+//     "searching": false,
+//     "ordering": true,
+//     "info": true,
+//     "autoWidth": false
+//   });
+// });
+//Date picker
+$(function () {
+  $('.datepicker').datepicker({
+    autoclose: true,
+    format: 'dd MM yyyy'
+  });
+  //Timepicker
+  $(".timepicker").timepicker({
+    showInputs: false
+  });
+  // $(".textarea").wysihtml5();
+});
+</script>
+
+</body>
+</html>
