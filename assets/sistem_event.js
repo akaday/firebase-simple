@@ -57,6 +57,13 @@ $(document).on('click','#detail_event',function(){
   detail_event(id_db);
 });
 
+//detail user mengikuti event
+$(document).on('click','#user_ikut_event',function(){
+  var id_db = $(this).data('key');
+
+  detail_event_user(id_db);
+});
+
 //input event
 $(document).on('click','#crete_event',function(){
   var do_db_event = "<button id='do_db_event' class='btn btn-primary'>Submit</button>";
@@ -102,7 +109,6 @@ $(document).on('click','#edit_event',function(){
 
 });
 
-
 //function menampilkan
 function list_event()
 {
@@ -112,7 +118,11 @@ function list_event()
     db.on('value', function(data) {
         i = 1;
         data.forEach(function(data) {
-          var isi='<tr><td>'+ i++  +'</td><td><img scr="'+ data.val().image +'" width="200px"></td><td>'+data.val().nama_event+'</td><td>'+data.val().tanggal+'</td><td>'+data.val().waktu+'</td><td>'+data.val().kuota_event+'</td><td><button class="btn btn-success" id="detail_event" data-key="'+data.key+'"><span class="fa fa-eye"></span></button><button class="btn btn-info" id="edit_event" data-key="'+data.key+'"><span class="fa fa-pencil"></span></button><button class="btn btn-danger" id="delete_event" data-key="'+data.key+'" ><span class="fa fa-trash"></span></button></td></tr>';
+
+          var image = data.val().image;
+          //var image = "https://firebasestorage.googleapis.com/v0/b/dilo-event.appspot.com/o/images%2F4.png?alt=media&token=63f4dacc-37a3-442b-a926-378680a1953e";
+
+          var isi='<tr><td>'+ i++  +'</td><td><img scr="'+ image +'" width="200px"></td><td>'+data.val().nama_event+'</td><td>'+data.val().tanggal+'</td><td>'+data.val().waktu+'</td><td>'+data.val().kuota_event+'</td><td><button class="btn btn-success" id="detail_event" data-key="'+data.key+'"><span class="fa fa-eye"></span></button><button class="btn btn-info" id="edit_event" data-key="'+data.key+'"><span class="fa fa-pencil"></span></button><button class="btn btn-danger" id="delete_event" data-key="'+data.key+'" ><span class="fa fa-trash"></span></button></td></tr>';
           dataevent.append(isi);
         });
     });
@@ -123,12 +133,13 @@ function detail_event(key)
     var db = firebase.database().ref().child(module_name).child(key);
     db.on('value', function(data) {
 
-      var btn_detail_user  = "<button class=\"btn btn-primary\" id=\"btn_detail_user\" href=\"#\"> User Mengikuti </button>";
-      var head        = "<div class='text-right'>"+btn_detail_user+" "+btn_back+"</div><br>";
-      var image       = "<img class=\"img-thumbnail img-responsive center\" style=\"margin:10px; max-width: 80%\"  src=\""+data.val().image+"\"><br>";
-      var tanggal     = "Tanggal : "+data.val().tanggal+", "+data.val().waktu+"<br/>";
-      var kuota_event = "Kuota : "+data.val().kuota_event+"<br/>";
-      var deskripsi   = "<p>"+data.val().deskripsi+"</p>";
+      var btn_detail_user   = "<button class=\"btn btn-primary\" id=\"user_ikut_event\" data-key='"+data.key+"'> User Mengikuti </button>";
+      var head              = "<div class='text-right'>"+btn_back+"</div><br>";
+      var img_name          = data.val().image;
+      var image             = "<img class=\"img-thumbnail img-responsive center\" style=\"margin:10px; max-width: 80%\"  src=\""+data.val().image+"\"><br>";
+      var tanggal           = "Tanggal : "+data.val().tanggal+", "+data.val().waktu+"<br/>";
+      var kuota_event       = "Kuota : "+data.val().kuota_event+"<br/>";
+      var deskripsi         = "<p>"+data.val().deskripsi+"</p>";
 
       $('#html_event_detail').append(head);
       $('#html_event_detail').append(image);
@@ -137,6 +148,29 @@ function detail_event(key)
       $('#html_event_detail').append(deskripsi);
 
       $("#title_page_h3").text(data.val().nama_event);
+    });
+
+    $('#html_event_user').show();
+    // console.log(key);
+    detail_event_user(key);
+
+}
+
+function detail_event_user(key)
+{
+    var dataeventuser = $('#dataeventuser');
+    dataeventuser.empty();
+
+    var db = firebase.database().ref().child('user');
+    db.on('value', function(data) {
+        i = 1;
+        data.forEach(function(data) {
+          if(data.val().event_diikuti == key)
+          {
+            var isi='<tr><td>'+ i++  +'</td><td>'+data.val().nama+'</td><td>'+data.val().email+'</td><td>'+data.val().nohp+'</td></tr>';
+            dataeventuser.append(isi);
+          }
+        });
     });
 }
 
@@ -147,6 +181,7 @@ function global_show_and_hide()
   $('#html_event_list').hide();
   $('#html_event_detail').empty();
   $('#html_form_list').hide();
+  $('#html_event_user').hide();
 
   //alert
   $("#alert").attr('class', '');
@@ -180,6 +215,8 @@ $(document).on('click','#do_db_event',function(){
     var waktu       = $("#waktu").val();
     var kuota_event = $("#kuota_event").val();
     var deskripsi   = $("#deskripsi").val();
+    var foto       = $("#foto").val();
+    // var foto        = "https://firebasestorage.googleapis.com/v0/b/dilo-event.appspot.com/o/images%2"+foto1+"?alt=media";
 
     //Validasi
     if(nama_event.length == 0){
@@ -222,7 +259,8 @@ $(document).on('click','#do_db_event',function(){
             var dbRef = firebase.database().ref(module_name);
             dbRef.push({
                   deskripsi: deskripsi,
-                  image:"http://www.bekup-portal.com/images/2016/10/08/NEW-BANNER-BEKUP-20-02-1980x768.png",
+                  // image:"http://www.bekup-portal.com/images/2016/10/08/NEW-BANNER-BEKUP-20-02-1980x768.png",
+                  image: foto,
                   kuota_event: kuota_event,
                   nama_event: nama_event,
                   tanggal: tanggal,
@@ -239,7 +277,9 @@ $(document).on('click','#do_db_event',function(){
 
             dbRef.update({
                 deskripsi: deskripsi,
-                image:"http://www.bekup-portal.com/images/2016/10/08/NEW-BANNER-BEKUP-20-02-1980x768.png",
+                // image:"http://www.bekup-portal.com/images/2016/10/08/NEW-BANNER-BEKUP-20-02-1980x768.png",
+                // image:"https://firebasestorage.googleapis.com/v0/b/dilo-event.appspot.com/o/images%2F1.jpg?alt=media&token=a1987126-5aa4-42b2-a4e2-4f7698b36d3c",
+                image: foto,
                 kuota_event: kuota_event,
                 nama_event: nama_event,
                 tanggal: tanggal,
@@ -290,8 +330,11 @@ $(document).on('click','#do_logout',function(){
 /**
     BUTTON
             **/
-//get elements
-var btn_foto        = document.getElementById("foto");
+/**
+  UPLOAD
+          **/
+          //get elements
+var btn_foto        = document.getElementById("foto_button");
 var progress_upload = document.getElementById("uploader");
 
 // listen for file selection
@@ -323,7 +366,7 @@ btn_foto.addEventListener('change', function(e)
 
     function complete()
     {
-
+        $("#foto").val(file.name);
     }
 
   );
@@ -331,12 +374,21 @@ btn_foto.addEventListener('change', function(e)
 });
 
 /**
-  UPLOAD
-          **/
-
-
-
-/**
   END UPLOAD
           **/
+
+//SEARCH GAGAL
+// var key = "-KWUG3p068X4LVQVN_at";
+// var rootRef = firebase.database().ref();
+// var query  = rootRef.child('user').orderByChild('email').equalTo('cakra.ds@gmail.com');
+// query.on("child_added", function(data) {
+//    console.log("Equal to filter: " + data.val().nama);
+// });
+
+// var playersRef = firebase.database().ref("user/");
+//
+// playersRef.orderByChild("email").equalTo("cakra.ds@gmail.com").on("child_added", function(data) {
+//    console.log("Equal to filter: " + data.val().email);
+// });
+
 });

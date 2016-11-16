@@ -12,16 +12,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="assets/plugins/datatables/dataTables.bootstrap.css">
-  <!-- Date Picker -->
-  <link rel="stylesheet" href="assets/plugins/datepicker/datepicker3.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="assets/plugins/daterangepicker/daterangepicker.css">
-  <!-- Bootstrap time Picker -->
-  <link rel="stylesheet" href="assets/plugins/timepicker/bootstrap-timepicker.min.css">
-  <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="assets/adminlte/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -127,8 +117,8 @@
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
         <!-- <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Kategori Event</span></a></li> -->
-        <li id='module_event' class="active"><a href="#"><i class="fa fa-circle-o text-red"></i> <span>List Event</span></a></li>
-        <li id='module_user'><a href="user.html"><i class="fa fa-circle-o text-aqua"></i> <span>List User</span></a></li>
+        <li id='module_event' ><a href="event.html"><i class="fa fa-circle-o text-red"></i> <span>List Event</span></a></li>
+        <li id='module_user'><a href="user.html" class="active"><i class="fa fa-circle-o text-aqua"></i> <span>List User</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -163,98 +153,48 @@
           </div>
         </div>
         <div class="box-body">
-        <div id='alert' class='alert'></div><br />
-        <!-- Show list Event -->
-        <div id='html_event_list'>
-          <!-- <table id="example2" class="table table-bordered table-hover"> -->
-          <table class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                  <th>No.</th>
-                  <th>image</th>
-                  <th>nama</th>
-                  <th>tanggal</th>
-                  <th>waktu</th>
-                  <th>kuota</th>
-                  <th>aksi</th>
-                </tr>
-                </thead>
-                <tbody id='dataevent'>
+          <div id='alert' class='alert'></div><br />
 
-                </tbody>
-          </table>
-        </div>
+          <!-- Show User yang mengikuti Event  -->
+          <div id='html_user_list'>
+            <table class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>email</th>
+                    <th>nama</th>
+                    <th>no hp</th>
+                    <th>aksi</th>
+                  </tr>
+                  </thead>
+                  <tbody id='datauser'>
 
-        <!-- Show detail Event -->
-        <div id='html_event_detail'>
+                  </tbody>
+            </table>
+          </div>
 
-        </div>
+          <!-- Show list Event -->
+          <div id='html_user_event_list'>
+            <!-- <table id="example2" class="table table-bordered table-hover"> -->
+            <table class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>image</th>
+                    <th>nama</th>
+                    <th>tanggal</th>
+                    <th>waktu</th>
+                    <th>kuota</th>
+                    <!-- <th>aksi</th> -->
+                  </tr>
+                  </thead>
+                  <tbody id='datauserevent'>
 
-        <!-- Show User yang mengikuti Event  -->
-        <div id='html_event_user'>
-          <br /><br />
-          <h4>Registered User :</h4>
-          <table class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                  <th>No.</th>
-                  <th>email</th>
-                  <th>nama</th>
-                  <th>no hp</th>
-                  <!-- <th>aksi</th> -->
-                </tr>
-                </thead>
-                <tbody id='dataeventuser'>
+                  </tbody>
+            </table>
+          </div>
 
-                </tbody>
-          </table>
-        </div>
 
-        <!-- Show Form Event -->
-        <form id='html_form_list'>
-            <input id="key" class="form-control" type="hidden" value='0'>
-            <div class="form-group">
-              <label> nama event </label> <span id='alert_nama_event'></span>
-              <input id="nama_event" class="form-control" placeholder="Nama Event" type="text">
-            </div>
-            <div class="form-group">
-                <label>tanggal </label> <span id='alert_tanggal'></span>
-                <div class="input-group date">
-                  <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                  </div>
-                  <input id="tanggal" class="form-control pull-right datepicker"  type="text">
-                </div>
-                <!-- /.input group -->
-              </div>
-            <div class="form-group">
-              <label>waktu</label> <span id='alert_waktu'></span>
-              <div class="input-group">
-                <input id="waktu" class="form-control timepicker" >
-                <div class="input-group-addon">
-                  <i class="fa fa-clock-o"></i>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label> kuota </label> <span id='alert_kuota_event'></span>
-              <input id="kuota_event" class="form-control" placeholder="Kuota Event" type="text" >
-            </div>
-            <div class="form-group">
-              <label for="exampleInputFile"> deskripsi </label> <span id='alert_deskripsi'></span>
-              <textarea id='deskripsi' class="textarea" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputFile"> foto </label> <span id='alert_foto'></span>
-              <input id="foto_button" type="file" value='upload'>
-              <input id="foto" type="hidden" >
-              <br />
-              <progress value='0' max='100' class="form-control" id='uploader'></progress>
-            </div>
-            <hr />
-            <button id='do_db_event' class='btn btn-primary'>Submit</button>
-            <button class="btn btn-info" id="module_event" >BACK</button>
-        </form>
         </div>
         <!-- /.box-body -->
       </div>
@@ -291,50 +231,11 @@
 <!-- jQuery 2.2.3 -->
 <script src="assets/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- SISTEM -->
-<script src="assets/sistem_event.js"></script>
+<script src="assets/sistem_user.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-<!-- daterangepicker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
-<!-- datepicker -->
-<script src="assets/plugins/datepicker/bootstrap-datepicker.js"></script>
-<!-- bootstrap time picker -->
-<script src="assets/plugins/timepicker/bootstrap-timepicker.min.js"></script>
-<!-- Bootstrap WYSIHTML5 -->
-<script src="assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-<!-- datatables -->
-<script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="assets/adminlte/app.min.js"></script>
-<!-- DATA -->
-<script>
-//Data Table
-// $(function () {
-//   $("#example1").DataTable();
-//   $('#example2').DataTable({
-//     "paging": true,
-//     "lengthChange": false,
-//     "searching": false,
-//     "ordering": true,
-//     "info": true,
-//     "autoWidth": false
-//   });
-// });
-//Date picker
-$(function () {
-  $('.datepicker').datepicker({
-    autoclose: true,
-    format: 'dd MM yyyy'
-  });
-  //Timepicker
-  $(".timepicker").timepicker({
-    showInputs: false
-  });
-  // $(".textarea").wysihtml5();
-});
-</script>
 
 </body>
 </html>
